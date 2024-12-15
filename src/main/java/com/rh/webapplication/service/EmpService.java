@@ -2,6 +2,9 @@ package com.rh.webapplication.service;
 
 import com.rh.webapplication.pojo.Emp;
 import com.rh.webapplication.pojo.PageResult;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 public interface EmpService {
     /**
@@ -10,5 +13,5 @@ public interface EmpService {
      * @param pageSize 每页显示的记录数
      * @return
      */
-    PageResult<Emp> page(Integer page, Integer pageSize);
+    PageResult<Emp> page(Integer page, Integer pageSize,String name, Integer gender, LocalDate begin,LocalDate end);
 }
