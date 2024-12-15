@@ -1,8 +1,8 @@
 package com.rh.webapplication.service.impl;
 
-import com.rh.web.mapper.EmpMapper;
-import com.rh.web.pojo.Emp;
-import com.rh.web.pojo.PageResult;
+import com.rh.webapplication.mapper.EmpMapper;
+import com.rh.webapplication.pojo.Emp;
+import com.rh.webapplication.pojo.PageResult;
 import com.rh.webapplication.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,9 +1,9 @@
 package com.rh.webapplication.controller;
 
-import com.rh.web.pojo.Emp;
-import com.rh.web.pojo.PageResult;
-import com.rh.web.pojo.Result;
-import com.rh.web.service.EmpService;
+import com.rh.webapplication.pojo.Emp;
+import com.rh.webapplication.pojo.PageResult;
+import com.rh.webapplication.pojo.Result;
+import com.rh.webapplication.service.EmpService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

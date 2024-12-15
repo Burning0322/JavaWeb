@@ -1,7 +1,7 @@
 package com.rh.webapplication.service;
 
-import com.rh.web.pojo.Emp;
-import com.rh.web.pojo.PageResult;
+import com.rh.webapplication.pojo.Emp;
+import com.rh.webapplication.pojo.PageResult;
 
 public interface EmpService {
     /**

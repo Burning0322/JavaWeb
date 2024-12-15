@@ -1,6 +1,6 @@
 package com.rh.webapplication.mapper;
 
-import com.rh.web.pojo.Dept;
+import com.rh.webapplication.pojo.Dept;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

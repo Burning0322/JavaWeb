@@ -1,6 +1,6 @@
 package com.rh.webapplication.service;
 
-import com.rh.web.pojo.Dept;
+import com.rh.webapplication.pojo.Dept;
 import java.util.List;
 
 public interface DeptService {

@@ -1,7 +1,7 @@
 package com.rh.webapplication.service.impl;
 
-import com.rh.web.mapper.DeptMapper;
-import com.rh.web.pojo.Dept;
+import com.rh.webapplication.mapper.DeptMapper;
+import com.rh.webapplication.pojo.Dept;
 import com.rh.webapplication.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

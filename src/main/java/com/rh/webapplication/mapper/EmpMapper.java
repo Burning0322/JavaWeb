@@ -1,6 +1,6 @@
 package com.rh.webapplication.mapper;
 
-import com.rh.web.pojo.Emp;
+import com.rh.webapplication.pojo.Emp;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

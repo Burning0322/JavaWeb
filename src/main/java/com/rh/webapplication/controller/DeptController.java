@@ -1,8 +1,8 @@
 package com.rh.webapplication.controller;
 
-import com.rh.web.pojo.Dept;
-import com.rh.web.pojo.Result;
-import com.rh.web.service.DeptService;
+import com.rh.webapplication.pojo.Dept;
+import com.rh.webapplication.pojo.Result;
+import com.rh.webapplication.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
