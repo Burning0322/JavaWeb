@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: webapplication
+  datasource:
+    url: jdbc:mysql://localhost:3306/web
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
