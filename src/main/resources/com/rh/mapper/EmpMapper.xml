@@ -5,7 +5,7 @@
 <mapper namespace="com.rh.webapplication.mapper.EmpMapper">
     <select id="list" resultType="com.rh.webapplication.pojo.Emp">
         select e.*,d.name deptName from emp e left join dept d on e.dept_id=d.id
-        where e.name like '%#{name}%' and e.gender=#{gender} and
+        where e.name like concat('%',#{name},'%') and e.gender=#{gender} and
         e.entry_date between #{begin} and #{end}
         order by e.update_time desc
     </select>
