@@ -1,6 +1,7 @@
 package com.rh.webapplication.controller;
 
 import com.rh.webapplication.pojo.Emp;
+import com.rh.webapplication.pojo.EmpQueryParam;
 import com.rh.webapplication.pojo.PageResult;
 import com.rh.webapplication.pojo.Result;
 import com.rh.webapplication.service.EmpService;
@@ -37,13 +38,21 @@ public class EmpController {
 //        PageResult<Emp> pageResult=empService.page(page,pageSize);
 //        return Result.success(pageResult);
 //    }
+
+//    @GetMapping
+//    public Result page(@RequestParam(defaultValue = "1") Integer page,
+//                       @RequestParam(defaultValue = "10")Integer pageSize,
+//                       String name, Integer gender,
+//                       @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,@DateTimeFormat(pattern = "yyyy-MM-dd")  LocalDate end){
+//        log.info("分页查询：{},{},{},{},{},{}",page,pageSize,name,gender,begin,end);
+//        PageResult<Emp> pageResult=empService.page(page,pageSize,name,gender,begin,end);
+//        return Result.success(pageResult);
+//    }
+
     @GetMapping
-    public Result page(@RequestParam(defaultValue = "1") Integer page,
-                       @RequestParam(defaultValue = "10")Integer pageSize,
-                       String name, Integer gender,
-                       @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,@DateTimeFormat(pattern = "yyyy-MM-dd")  LocalDate end){
-        log.info("分页查询：{},{},{},{},{},{}",page,pageSize,name,gender,begin,end);
-        PageResult<Emp> pageResult=empService.page(page,pageSize,name,gender,begin,end);
+    public Result page(EmpQueryParam empQueryParam){
+        log.info("分页查询：{},{},{},{},{},{}",empQueryParam);
+        PageResult<Emp> pageResult=empService.page(empQueryParam);
         return Result.success(pageResult);
     }
 

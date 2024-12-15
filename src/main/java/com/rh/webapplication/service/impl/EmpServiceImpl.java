@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.rh.webapplication.mapper.EmpMapper;
 import com.rh.webapplication.pojo.Emp;
+import com.rh.webapplication.pojo.EmpQueryParam;
 import com.rh.webapplication.pojo.PageResult;
 import com.rh.webapplication.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +36,22 @@ public class EmpServiceImpl implements EmpService {
 //
 //        return new PageResult<Emp> (total,rows);
 //    }
-    @Override
-    public PageResult<Emp> page(Integer page, Integer pageSize, String name, Integer gender, LocalDate begin, LocalDate end) {
-        PageHelper.startPage(page,pageSize);
+//    @Override
+//    public PageResult<Emp> page(Integer page, Integer pageSize, String name, Integer gender, LocalDate begin, LocalDate end) {
+//        PageHelper.startPage(page,pageSize);
+//
+//        List<Emp> empList=empMapper.list(name,gender,begin,end);
+//
+//        Page<Emp> p =(Page<Emp>) empList;
+//        return new PageResult<Emp>(p.getTotal(),p.getResult());
+//    }
+        @Override
+        public PageResult<Emp> page(EmpQueryParam empQueryParam) {
+            PageHelper.startPage(empQueryParam.getPage(),empQueryParam.getPageSize());
 
-        List<Emp> empList=empMapper.list(name,gender,begin,end);
+            List<Emp> empList=empMapper.list(empQueryParam.getName(),empQueryParam.getGender(),empQueryParam.getBegin(),empQueryParam.getEnd());
 
-        Page<Emp> p =(Page<Emp>) empList;
-        return new PageResult<Emp>(p.getTotal(),p.getResult());
-    }
+            Page<Emp> p =(Page<Emp>) empList;
+            return new PageResult<Emp>(p.getTotal(),p.getResult());
+        }
 }
