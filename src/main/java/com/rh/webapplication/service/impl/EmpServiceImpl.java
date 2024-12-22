@@ -63,7 +63,7 @@ public class EmpServiceImpl implements EmpService {
         return new PageResult<Emp>(p.getTotal(),p.getResult());
     }
 
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = {Exception.class})
     @Override
     public void save(Emp emp) {
         emp.setCreateTime(LocalDateTime.now());
