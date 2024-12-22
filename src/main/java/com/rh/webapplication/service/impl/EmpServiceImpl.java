@@ -11,10 +11,12 @@ import com.rh.webapplication.pojo.PageResult;
 import com.rh.webapplication.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
 
 @Service
 public class EmpServiceImpl implements EmpService {
@@ -61,6 +63,7 @@ public class EmpServiceImpl implements EmpService {
         return new PageResult<Emp>(p.getTotal(),p.getResult());
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void save(Emp emp) {
         emp.setCreateTime(LocalDateTime.now());

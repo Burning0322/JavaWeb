@@ -22,7 +22,19 @@ public class Emp {
     private LocalDateTime createTime; //创建时间
     private LocalDateTime updateTime; //修改时间
 
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
+    }
+
     private String deptName;
 
     private List<EmpExpr> exprList;
+
+    public List<EmpExpr> getExprList() {
+        return exprList;
+    }
 }

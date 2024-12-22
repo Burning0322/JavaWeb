@@ -10,6 +10,5 @@
         </foreach>
         values (37,'2020-01-01','2021-01-01','Google','Software Engineer'),
         (37,'2021-01-01','2022-01-01','Facebook','Software Engineer');
-
     </insert>
 </mapper>
