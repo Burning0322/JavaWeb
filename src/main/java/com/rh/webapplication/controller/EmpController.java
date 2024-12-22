@@ -11,6 +11,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 员工管理Controller
@@ -64,5 +66,29 @@ public class EmpController {
         empService.save(emp);
         return Result.success();
     }
+
+//    /**
+//     * 删除员工
+//     * @return
+//     */
+//    @DeleteMapping
+//    public Result delete(Integer[] ids)
+//    {
+//        log.info("删除员工：{}", Arrays.toString(ids));
+//        return Result.success();
+//    }
+
+    /**
+     * 删除员工 List
+     * @return
+     */
+    @DeleteMapping
+    public Result delete(@RequestParam List<Integer> ids)
+    {
+        log.info("删除员工：{}", ids);
+        empService.delete(ids);
+        return Result.success();
+    }
+
 
 }

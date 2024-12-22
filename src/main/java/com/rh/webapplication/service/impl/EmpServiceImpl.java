@@ -89,4 +89,13 @@ public class EmpServiceImpl implements EmpService {
             empLogService.insertLog(empLog);
         }
     }
+
+    @Transactional(rollbackFor = {Exception.class})
+    @Override
+    public void delete(List<Integer> ids) {
+        //删除员工的基本信息
+        empMapper.deleteByIds(ids);
+        //删除员工的工作经历信息
+        empExprMapper.deleteByEmpIds(ids);
+    }
 }
