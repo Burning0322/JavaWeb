@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -17,6 +18,11 @@ public class UploadController {
         log.info("name:{}", name);
         log.info("age:{}", age);
         log.info("file:{}", file.getOriginalFilename());
+
+        String originalFilename = file.getOriginalFilename();
+
+        String extension=originalFilename.substring(originalFilename.lastIndexOf("."));
+        String newFileName= UUID.randomUUID().toString()+extension;
 
         file.transferTo(new File("/Users/renhonglow/Library/Mobile Documents/com~apple~CloudDocs/JAVAWEB/webapplication/src/main/resources/image"+
                 file.getOriginalFilename()));
