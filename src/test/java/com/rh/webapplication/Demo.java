@@ -1,13 +1,14 @@
 package com.rh.webapplication;
 
-import com.aliyun.oss.ClientException;
-import com.aliyun.oss.OSS;
+import com.aliyun.oss.*;
 import com.aliyun.oss.common.auth.*;
-import com.aliyun.oss.OSSClientBuilder;
-import com.aliyun.oss.OSSException;
+import com.aliyun.oss.common.comm.SignVersion;
 import com.aliyun.oss.model.PutObjectRequest;
 import com.aliyun.oss.model.PutObjectResult;
+
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.nio.file.Files;
 
 public class Demo {
 
@@ -22,13 +23,12 @@ public class Demo {
         String objectName = "001.jpg";
         // 填写本地文件的完整路径，例如D:\\localpath\\examplefile.txt。
         // 如果未指定本地路径，则默认从示例程序所属项目对应本地路径中上传文件。
-        String filePath= "D:\\localpath\\examplefile.txt";
         // 填写Bucket所在地域。以华东1（杭州）为例，Region填写为cn-hangzhou。
-        String region = "cn-hangzhou";
+        String region = "cn-beijing";
         
         // 创建OSSClient实例。
         ClientBuilderConfiguration clientBuilderConfiguration = new ClientBuilderConfiguration();
-        clientBuilderConfiguration.setSignatureVersion(SignVersion.V4);        
+        clientBuilderConfiguration.setSignatureVersion(SignVersion.V4);
         OSS ossClient = OSSClientBuilder.create()
         .endpoint(endpoint)
         .credentialsProvider(credentialsProvider)
@@ -37,16 +37,19 @@ public class Demo {
         .build();
 
         try {
-            // 创建PutObjectRequest对象。
-            PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, objectName, new File(filePath));
-            // 如果需要上传时设置存储类型和访问权限，请参考以下示例代码。
-            // ObjectMetadata metadata = new ObjectMetadata();
-            // metadata.setHeader(OSSHeaders.OSS_STORAGE_CLASS, StorageClass.Standard.toString());
-            // metadata.setObjectAcl(CannedAccessControlList.Private);
-            // putObjectRequest.setMetadata(metadata);
-            
-            // 上传文件。
-            PutObjectResult result = ossClient.putObject(putObjectRequest);           
+//            // 创建PutObjectRequest对象。
+//            PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, objectName, new File(filePath));
+//            // 如果需要上传时设置存储类型和访问权限，请参考以下示例代码。
+//            // ObjectMetadata metadata = new ObjectMetadata();
+//            // metadata.setHeader(OSSHeaders.OSS_STORAGE_CLASS, StorageClass.Standard.toString());
+//            // metadata.setObjectAcl(CannedAccessControlList.Private);
+//            // putObjectRequest.setMetadata(metadata);
+//
+//            // 上传文件。
+//            PutObjectResult result = ossClient.putObject(putObjectRequest);
+            File file=new File("/Users/renhonglow/Library/Mobile Documents/com~apple~CloudDocs/JAVAWEB/webapplication/src/main/resources/image/Picture1.png");
+            byte[] content = Files.readAllBytes(file.toPath());
+            ossClient.putObject(bucketName,objectName,new ByteArrayInputStream(content));
         } catch (OSSException oe) {
             System.out.println("Caught an OSSException, which means your request made it to OSS, "
                     + "but was rejected with an error response for some reason.");

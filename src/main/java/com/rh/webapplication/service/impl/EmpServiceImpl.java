@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class EmpServiceImpl implements EmpService {
 //
 //        return new PageResult<Emp> (total,rows);
 //    }
+
 //    @Override
 //    public PageResult<Emp> page(Integer page, Integer pageSize, String name, Integer gender, LocalDate begin, LocalDate end) {
 //        PageHelper.startPage(page,pageSize);
@@ -56,12 +58,15 @@ public class EmpServiceImpl implements EmpService {
 //    }
     @Override
     public PageResult<Emp> page(EmpQueryParam empQueryParam) {
-        PageHelper.startPage(empQueryParam.getPage(),empQueryParam.getPageSize());
+        //1. 设置分页参数(PageHelper)
+        PageHelper.startPage(empQueryParam.getPage(), empQueryParam.getPageSize());
 
-        List<Emp> empList=empMapper.list(empQueryParam);
+        //2. 执行查询
+        List<Emp> empList = empMapper.list(empQueryParam);
 
-        Page<Emp> p =(Page<Emp>) empList;
-        return new PageResult<Emp>(p.getTotal(),p.getResult());
+        //3. 解析查询结果, 并封装
+        Page<Emp> p = (Page<Emp>) empList;
+        return new PageResult<Emp>(p.getTotal(), p.getResult());
     }
 
     @Transactional(rollbackFor = {Exception.class})
@@ -74,8 +79,10 @@ public class EmpServiceImpl implements EmpService {
 
             List<EmpExpr> exprList = emp.getExprList();
             if(!CollectionUtils.isEmpty(exprList)){
+                exprList.forEach(empExpr -> {
+                    empExpr.setEmpId(emp.getId());
+                });
                 empExprMapper.insertBatch(exprList);
-                return;
             }
         }finally {
             EmpLog empLog=new EmpLog(null,LocalDateTime.now(),"新增员工:"+emp);

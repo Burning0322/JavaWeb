@@ -15,8 +15,8 @@ import java.time.LocalDate;
 /**
  * 员工管理Controller
  */
-@Slf4j
-@RequestMapping("emps")
+
+@RequestMapping("/emps")
 @RestController
 public class EmpController {
     /**
@@ -48,8 +48,8 @@ public class EmpController {
 
     @GetMapping
     public Result page(EmpQueryParam empQueryParam){
-        log.info("分页查询：{},{},{},{},{},{}",empQueryParam);
-        PageResult<Emp> pageResult=empService.page(empQueryParam);
+        log.info("分页查询: {}", empQueryParam);
+        PageResult<Emp> pageResult = empService.page(empQueryParam);
         return Result.success(pageResult);
     }
 
