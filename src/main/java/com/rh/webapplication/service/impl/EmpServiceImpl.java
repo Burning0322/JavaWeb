@@ -4,10 +4,8 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.rh.webapplication.mapper.EmpExprMapper;
 import com.rh.webapplication.mapper.EmpMapper;
-import com.rh.webapplication.pojo.Emp;
-import com.rh.webapplication.pojo.EmpExpr;
-import com.rh.webapplication.pojo.EmpQueryParam;
-import com.rh.webapplication.pojo.PageResult;
+import com.rh.webapplication.pojo.*;
+import com.rh.webapplication.service.EmpLogService;
 import com.rh.webapplication.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +30,9 @@ public class EmpServiceImpl implements EmpService {
 
     @Autowired
     private EmpExprMapper empExprMapper;
+
+    @Autowired
+    private EmpLogService empLogService;
 
 //    @Override
 //    public PageResult<Emp> page(Integer page, Integer pageSize) {
@@ -66,16 +67,19 @@ public class EmpServiceImpl implements EmpService {
     @Transactional(rollbackFor = {Exception.class})
     @Override
     public void save(Emp emp) {
-        emp.setCreateTime(LocalDateTime.now());
-        emp.setUpdateTime(LocalDateTime.now());
-        empMapper.insert(emp);
+        try {
+            emp.setCreateTime(LocalDateTime.now());
+            emp.setUpdateTime(LocalDateTime.now());
+            empMapper.insert(emp);
 
-        List<EmpExpr> exprList = emp.getExprList();
-        if(!CollectionUtils.isEmpty(exprList)){
-            empExprMapper.insertBatch(exprList);
-            return;
+            List<EmpExpr> exprList = emp.getExprList();
+            if(!CollectionUtils.isEmpty(exprList)){
+                empExprMapper.insertBatch(exprList);
+                return;
+            }
+        }finally {
+            EmpLog empLog=new EmpLog(null,LocalDateTime.now(),"新增员工:"+emp);
+            empLogService.insertLog(empLog);
         }
     }
-
-
 }
